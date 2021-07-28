@@ -1,7 +1,7 @@
 {
-  "name": "my-webpack-project",
+  "name": "ava-hiring-challenge",
   "version": "1.0.0",
-  "description": "My webpack project",
+  "description": "Repo to hold all code related to the hiring challenge from Ava.",
   "main": "index.js",
   "scripts": {
     "start": "nodemon src/server/server.js",
