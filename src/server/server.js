@@ -48,11 +48,20 @@ app.get('/info', (req, res) => res.status(200).json({
   frontend: { url: data.frontendUrl },
   language: 'node.js',
   sources: data.sources,
-  answers: data.answers
+  answers: data.answers,
 }));
 
 // POST /mutations
+app.post('/mutations', convController.mutate, (req, res) => {
+
+});
 
 // GET /conversations
+app.get('/conversations', convController.getAll, (req, res) => {
+
+});
 
 // DELETE /conversations
+app.delete('/conversations', convController.delete, (req, res) => {
+
+});
