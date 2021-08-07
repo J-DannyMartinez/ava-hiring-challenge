@@ -33,7 +33,8 @@ app.use(cors({
   optionsSuccessStatus: 200,
 }));
 
-// Endpoints
+// ---------- Endpoints ----------
+
 app.get('/', (req, res) => {
   res.status(200).sendFile(path.join(__dirname, '../../dist/index.html'));
 });
@@ -52,16 +53,29 @@ app.get('/info', (req, res) => res.status(200).json({
 }));
 
 // POST /mutations
-app.post('/mutations', convController.mutate, (req, res) => {
+app.post('/mutations',
+  convController.verifyConversation,
+  convController.addConversation,
+  convController.addMutation,
+  (req, res) => {
 
-});
+  });
 
 // GET /conversations
-app.get('/conversations', convController.getAll, (req, res) => res.json(res.locals.conversations));
+app.get('/conversations', convController.getAll, (req, res) => {
+  res
+    .status(res.locals.response.ok ? 200 : 500)
+    .json(res.locals.response);
+});
 
 // DELETE /conversations
 app.delete('/conversations', convController.delete, (req, res) => {
-
+  // res
+  //   .status(204)
+  //   .json(res.locals.response);
 });
 
-app.listen(PORT, () => console.log(`Server listening on port ${PORT}`))
+// 404 error handler
+app.use((req, res) => res.status(404).json('These are not the droids you are looking for.'));
+
+app.listen(PORT, () => console.log(`Server listening on port ${PORT}`));
