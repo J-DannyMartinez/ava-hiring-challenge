@@ -7,7 +7,7 @@ module.exports = {
     db.query(queryString)
       .then((data) => {
         console.log(data);
-        res.locals.response.conversations = data;
+        res.locals.conversations = data.rows;
         return next();
       });
   },

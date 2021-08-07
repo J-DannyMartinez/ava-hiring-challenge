@@ -57,11 +57,11 @@ app.post('/mutations', convController.mutate, (req, res) => {
 });
 
 // GET /conversations
-app.get('/conversations', convController.getAll, (req, res) => {
-
-});
+app.get('/conversations', convController.getAll, (req, res) => res.json(res.locals.conversations));
 
 // DELETE /conversations
 app.delete('/conversations', convController.delete, (req, res) => {
 
 });
+
+app.listen(PORT, () => console.log(`Server listening on port ${PORT}`))
