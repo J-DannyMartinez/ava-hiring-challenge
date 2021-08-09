@@ -26,7 +26,7 @@ module.exports = {
   },
 
   verifyConversation: (req, res, next) => {
-    const { conversationID: convID } = req.body;
+    const { conversationId: convID } = req.body;
 
     // Query to verify the conversation id exists - if it doesn't create one
     db.query('SELECT * FROM conversations WHERE id = $1', [convID])
@@ -35,7 +35,7 @@ module.exports = {
       .then((dbInfo) => {
         // If the conversation does not exist, intialize one
         if (dbInfo.rows.length === 0) {
-          db.query('INSERT INTO conversations (text) VALUES ($1)', [convID])
+          db.query('INSERT INTO conversations (id) VALUES ($1)', [convID])
             .catch((err) => {
               res.locals.response.ok = false;
               res.locals.err = {
@@ -58,15 +58,25 @@ module.exports = {
       .finally(() => next());
   },
 
-  addMutation: (req, res, next) => {
+  addMutation: async (req, res, next) => {
     const {
-      author, conversationID: convID, data, origin,
+      author, conversationId: convID, data: mods, origin,
     } = req.body;
 
     res.locals.response = { text: '', msg: '', ok: true };
 
     // Create a new mutation and update the conversation data
-    
+    // Query conversation DB to find the last mutation in order to verify the origin
+    const dbQuery = `
+    SELECT convos.*, mutations.* 
+    FROM "public"."conversations" convos 
+      LEFT JOIN "public"."mutations" mutations
+        ON mutations.conversationID=convos.id
+    WHERE convos.id=$1
+    ORDER BY mutations.bob_origin DESC, mutations.alice_origin DESC;
+    `;
+
+    const dbData = await db.query(dbQuery, [convID]);
   },
 
   transform: (req, res, next) => {
@@ -78,14 +88,10 @@ module.exports = {
     res.locals.response = { msg: '', ok: true };
 
     // extract conversation to delete via id
-    const { conversationID: convID } = req.body;
+    const { conversationId: convID } = req.body;
 
     // query the DB
     db.query('DELETE FROM public.conversations WHERE id = $1', [convID])
-      // .then((rawData) => rawData.json())
-      // .then((dbInfo) => {
-      //   console.log('dbInfo', dbInfo);
-      // })
       .catch((err) => {
         res.locals.response.ok = false;
         res.locals.err = {
