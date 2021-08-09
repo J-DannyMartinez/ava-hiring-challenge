@@ -9,21 +9,12 @@ A conflict resolution example for multi-user transcript editing for a Voice-To-T
 - [@J-DannyMartinez](https://github.com/J-DannyMartinez)
 
   
-## Deployment
-
-To deploy this project run
-
-```bash
-  npm run deploy
-```
-
-  
 ## Run Locally
 
 Clone the project
 
 ```bash
-  git clone https://link-to-project
+  git clone https://github.com/J-DannyMartinez/ava-hiring-challenge.git
 ```
 
 Go to the project directory
@@ -47,15 +38,17 @@ Start the server
   
 ## Tech Stack
 
-**Server:** Node, Express
+**Server:** Node, Express, PostgreSQL
+
+**Client:** React, React Router
 
   
 ## Roadmap
 
-- Finalize all server endpoints
+- Fully flesh out the mutation algorithm to handle all conflicts
 
-- Create the mutate and transform algorithms
+- Create the front end within React to host all functionality, starting with viewing and modifying conversations
 
-- Create a React-based front-end with all requirements
+- Host application on secure endpoint (Heroku, AWS) 
 
   
