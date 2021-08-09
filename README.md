@@ -35,6 +35,16 @@ Start the server
   npm run start
 ```
 
+
+## Deployment
+
+To deploy this project run
+
+```bash
+  npm run build
+```
+
+  
   
 ## Tech Stack
 
