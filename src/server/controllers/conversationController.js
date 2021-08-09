@@ -93,12 +93,10 @@ module.exports = {
     // query the DB
     db.query('DELETE FROM public.conversations WHERE id = $1', [convID])
       .catch((err) => {
+        console.log(`Error deleting conversation from DB in delete: ${err}`);
+
         res.locals.response.ok = false;
-        res.locals.err = {
-          error: err,
-          msg: `Could not delete conversation with id ${convID}`,
-          log: 'Error found in query within delete middleware',
-        };
+        res.locals.msg = `Could not delete conversation with id ${convID}`;
       })
       .finally(() => next());
   },

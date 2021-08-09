@@ -69,9 +69,9 @@ app.get('/conversations', convController.getAll, (req, res) => {
 
 // DELETE /conversations
 app.delete('/conversations', convController.delete, (req, res) => {
-  // res
-  //   .status(204)
-  //   .json(res.locals.response);
+  res
+    .status(res.locals.response.ok ? 200 : 500)
+    .json(res.locals.response);
 });
 
 // 404 error handler
