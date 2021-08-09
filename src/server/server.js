@@ -11,12 +11,12 @@ const data = {
   frontendUrl: '',
   sources: {
     front: '',
-    back: '',
+    back: 'https://github.com/J-DannyMartinez/ava-hiring-challenge',
   },
   answers: {
-    1: '',
-    2: '',
-    3: '',
+    1: 'My approach to this problem was to start with creating the backend endpoints, create the mutation algorithm as middleware, and move forward with the React frontend to tie together the entire full-stack application. When creating the endpoints at the start, I focused on creating a skeleton of all needed endpoints and estimated middleware functionality to keep a roadmap of my progress. The /get methods, as usual, were pretty straightforward to implement. When I started my work on posting to conversations, I took a break from the programming to initialize a database to hold the information, which took a good chunk out of Day 2. I have an ER diagram which can be viewed here: https://imgur.com/a/RHdutmN . After my database was set up successfully, I worked on the GET and DELETE endpoints to manipulate the conversation data, then started work on the POST endpoint, which would house the core of the OT algorithm. When I realized I was close to the expiration of the 3-day time limit, I started working on a quick skeleton for the front-end React portion. Thank you for reading!',
+    2: 'If I had more time, I would love to fully flesh out the mutation algorithm, complete the front-end portion, and work on the undo functionality, as that seems rather interesting to implement.',
+    3: 'If I were on the hiring side, I would add some more information to the included tests that the user can reflect on. Currently, my tests are all failing via the web tests with limited info to debug, and locally the same tests run fine via postman.',
   },
 };
 
