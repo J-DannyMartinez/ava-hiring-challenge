@@ -55,7 +55,6 @@ app.get('/info', (req, res) => res.status(200).json({
 // POST /mutations
 app.post('/mutations',
   convController.verifyConversation,
-  convController.addConversation,
   convController.addMutation,
   (req, res) => {
 
